@@ -1,0 +1,162 @@
+To test the API thoroughly, we can use these JSON objects-
+to verify that the Validation, Custom Exceptions, and Service Logic are all working correctly.
+
+1. Successful POST Request (Task 1 & 2)
+Endpoint: POST /api/products
+
+This follows the SKU format SKU-XXXXXXXX and satisfies all bean validations.
+
+JSON
+{
+  "name": "Wireless Gaming Mouse",
+  "description": "Ergonomic 16000 DPI optical sensor mouse with RGB lighting.",
+  "sku": "SKU-A1B2C3D4",
+  "price": 59.99,
+  "quantity": 25,
+  "status": "ACTIVE"
+}
+2. Validation Failure (Task 1)
+Endpoint: POST /api/products
+
+This should trigger a 400 Bad Request because the price is negative and the name is blank.
+
+JSON
+{
+  "name": "",
+  "sku": "SKU-99999999",
+  "price": -10.50,
+  "quantity": 5,
+  "status": "ACTIVE"
+}
+3. Invalid SKU Format (Task 2 & 4)
+SKU = Stock Keeping Unit
+Endpoint: POST /api/products
+
+This should trigger your InvalidSkuFormatException because it doesn't match the SKU- prefix or the 8-character length.
+
+JSON
+{
+  "name": "Mechanical Keyboard",
+  "sku": "PROD-123",
+  "price": 120.00,
+  "quantity": 10,
+  "status": "ACTIVE"
+}
+4. Duplicate SKU (Task 2 & 4)
+Endpoint: POST /api/products
+
+After successfully creating the first product (SKU-A1B2C3D4), try sending this one.
+It should trigger SkuAlreadyExistsException (409 Conflict).
+
+JSON
+{
+  "name": "Another Mouse",
+  "sku": "SKU-A1B2C3D4",
+  "price": 45.00,
+  "quantity": 10,
+  "status": "ACTIVE"
+}
+5. Successful PUT Update (Task 3)
+Endpoint: PUT /api/products/1
+
+Use this to update the quantity or description of the product we created first.
+Note: The SKU must remain exactly the same as the original, or the service will throw an error.
+
+JSON
+{
+  "name": "Wireless Gaming Mouse - V2",
+  "description": "Updated version with longer battery life.",
+  "sku": "SKU-A1B2C3D4",
+  "price": 64.99,
+  "quantity": 50,
+  "status": "ACTIVE"
+}
+
+
+10 Sample Product Objects
+JSON
+[
+  {
+    "name": "Ultra-Wide Monitor",
+    "description": "34-inch curved LED monitor with 144Hz refresh rate.",
+    "sku": "SKU-B5C6D7E8",
+    "price": 499.99,
+    "quantity": 12,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Bluetooth Headphones",
+    "description": "Noise-cancelling over-ear headphones with 30-hour battery life.",
+    "sku": "SKU-F9G0H1I2",
+    "price": 199.50,
+    "quantity": 40,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Ergonomic Office Chair",
+    "description": "High-back mesh chair with lumbar support and adjustable armrests.",
+    "sku": "SKU-J3K4L5M6",
+    "price": 249.00,
+    "quantity": 15,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "description": "Tactile brown switches with customizable per-key RGB lighting.",
+    "sku": "SKU-N7O8P9Q0",
+    "price": 89.95,
+    "quantity": 30,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "USB-C Hub",
+    "description": "7-in-1 adapter with HDMI, USB 3.0, and SD card reader.",
+    "sku": "SKU-R1S2T3U4",
+    "price": 35.00,
+    "quantity": 100,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Legacy Laser Printer",
+    "description": "Black and white monochrome printer. Support ending soon.",
+    "sku": "SKU-V5W6X7Y8",
+    "price": 120.00,
+    "quantity": 5,
+    "status": "INACTIVE"
+  },
+  {
+    "name": "Webcam 1080p",
+    "description": "High-definition camera with built-in dual microphones.",
+    "sku": "SKU-Z9A0B1C2",
+    "price": 65.00,
+    "quantity": 22,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Portable SSD 1TB",
+    "description": "High-speed external solid state drive with rugged casing.",
+    "sku": "SKU-D3E4F5G6",
+    "price": 110.00,
+    "quantity": 60,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Vintage Tablet",
+    "description": "2015 model. No longer receiving software updates.",
+    "sku": "SKU-H7I8J9K0",
+    "price": 45.00,
+    "quantity": 0,
+    "status": "DISCONTINUED"
+  },
+  {
+    "name": "Gaming Desk",
+    "description": "Z-shaped metal frame with cable management tray.",
+    "sku": "SKU-L1M2N3O4",
+    "price": 175.00,
+    "quantity": 8,
+    "status": "ACTIVE"
+  }
+]
+
+
+
