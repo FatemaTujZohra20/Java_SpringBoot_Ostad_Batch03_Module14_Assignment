@@ -1,3 +1,5 @@
+SKU = Stock Keeping Unit
+
 To test the API thoroughly, we can use these JSON objects-
 to verify that the Validation, Custom Exceptions, and Service Logic are all working correctly.
 
