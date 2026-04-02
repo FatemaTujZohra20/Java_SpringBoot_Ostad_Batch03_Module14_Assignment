@@ -12,13 +12,14 @@ View all products:
 
 SQL
 
-`SELECT * FROM PRODUCT;
-Find a specific product by ID:`
+`SELECT * FROM PRODUCT;`
+Find a specific product by ID:
 
 SQL
 
-`SELECT * FROM PRODUCT WHERE id = 1;
-Check total stock value (Price * Quantity):`
+`SELECT * FROM PRODUCT WHERE id = 1;`
+
+Check total stock value (Price * Quantity):
 
 SQL
 
